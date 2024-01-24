@@ -122,6 +122,10 @@
          <xsl:element name="PID">  
             <xsl:element name="PID.1.1">
                <xsl:value-of select="number(/HL7/PID/PID.1.1)"/>
+            </xsl:element> 
+            
+            <xsl:element name="PID.2.1">
+               <xsl:value-of select="/HL7/PID/PID.2.1"/>
             </xsl:element>          
             
          </xsl:element> 
