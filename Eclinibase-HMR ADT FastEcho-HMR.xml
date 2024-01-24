@@ -1,0 +1,7 @@
+
+   <transformation>
+      <xslt>
+         <fichier obligatoire="true">Eclinibase-HMR ADT FastEcho-HMR perso.xsl</fichier>
+      </xslt>
+   </transformation>
+
