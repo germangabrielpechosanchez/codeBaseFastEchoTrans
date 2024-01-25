@@ -33,75 +33,89 @@
       <!-- votre code ici -->
       <!-- this is the identity transform: it copies everything that isn't matched by a more specific template -->
       <!-- recopie de tous les élements (node=balise, @=attribut) -->
+    
+    <xsl:variable name="messageType" select="/HL7/MSH/MSH.9.2" />
       
       <xsl:template name="MSH">
          <xsl:element name="MSH">
-       
                <xsl:element name="MSH.1.1">
                   <xsl:value-of select="/HL7/MSH/MSH.1.1"/>
                </xsl:element>
-           
-            
-            <!-- Encoding Characters-->
+               
+               <!-- Encoding Characters-->
                <xsl:element name="MSH.2.1">
                   <xsl:value-of select="/HL7/MSH/MSH.2.1"/>
                </xsl:element>
-         
-            
-            <!-- Sending Application-->
+               
+               
+               <!-- Sending Application-->
                <xsl:element name="MSH.3.1">
                   <xsl:value-of select="/HL7/MSH/MSH.3.1"/>
                </xsl:element>
-            
-            
-            <!-- Sending facility -->
+               
+               
+               <!-- Sending facility -->
                <xsl:element name="MSH.4.1">
-                  <xsl:value-of select="'HMR'"/>
+                  <xsl:value-of select="/HL7/MSH/MSH.4.1"/>
                </xsl:element>
-             
+               
                <xsl:element name="MSH.5.1">
                   <xsl:value-of select="'FASTECHO'"/>
                </xsl:element> 
-                  
+               
                <xsl:element name="MSH.6.1">
-                  <xsl:value-of select="'HMR'"/>
+                  <xsl:value-of select="/HL7/MSH/MSH.6.1"/>
                </xsl:element> 
-            
+               
                <xsl:element name="MSH.7.1">
                   <xsl:value-of select="/HL7/MSH/MSH.7.1"/>
                </xsl:element>
-            
+               
                <xsl:element name="MSH.8.1">
                   <xsl:value-of select="''"/>
                </xsl:element>
-                
+               
                <xsl:element name="MSH.9.1">
                   <xsl:value-of select="/HL7/MSH/MSH.9.1"/>
                </xsl:element>
                
-               <xsl:element name="MSH.9.2">   
-                  <xsl:value-of select="'A40'"/>
+               <xsl:element name="MSH.9.2"> 
+                  
+                  <xsl:if test="$messageType = 'A48'">     
+                     <xsl:value-of select="'A40'"/>
+                  </xsl:if>
+                  
+                  <xsl:if test="$messageType != 'A48'">     
+                     <xsl:value-of select="/HL7/MSH/MSH.9.2"/>
+                  </xsl:if> 
+                  
                </xsl:element>
-            
+               
                <xsl:element name="MSH.10.1">
                   <xsl:value-of select="/HL7/MSH/MSH.10.1"/>
                </xsl:element>
-            
+               
                <xsl:element name="MSH.11.1">
                   <xsl:value-of select="/HL7/MSH/MSH.11.1"/>
                </xsl:element>      
-            
+               
                <xsl:element name="MSH.12.1">
                   <xsl:value-of select="'2.4'"/>
                </xsl:element>
-           
-         </xsl:element>
-      </xsl:template> 
-        
+               
+         </xsl:element>  
+      </xsl:template>  
+      
       <xsl:template name="EVN">
          <xsl:element name="EVN">   
             <xsl:element name="EVN.1.1">    
-               <xsl:value-of select="'A40'"/>
+               <xsl:if test="$messageType = 'A48'">     
+                  <xsl:value-of select="'A40'"/>
+               </xsl:if>
+               
+               <xsl:if test="$messageType != 'A48'">     
+                  <xsl:value-of select="/HL7/MSH/MSH.9.2"/>
+               </xsl:if> 
             </xsl:element>
             
             <xsl:element name="EVN.2.1"> 
@@ -291,6 +305,111 @@
          </xsl:element> 
       </xsl:template> 
       
+      <xsl:template name="PV1">
+         <xsl:element name="PV1"> 
+               <xsl:element name="PV1.1.1">
+                  <xsl:value-of select="substring(/HL7/PV1/PV1.1.1,4,4)"/>
+               </xsl:element>
+               
+                  <xsl:element name="PV1.2.1">
+                        <xsl:value-of select="/HL7/PV1/PV1.2.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.3.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.3.1"/>
+                  </xsl:element>
+            
+                   <xsl:element name="PV1.3.2">
+                      <xsl:value-of select="/HL7/PV1/PV1.3.2"/>
+                   </xsl:element>
+                   
+                   <xsl:element name="PV1.3.3">
+                      <xsl:value-of select="/HL7/PV1/PV1.3.3"/>
+                   </xsl:element>
+                   
+                   <xsl:element name="PV1.3.4">
+                      <xsl:value-of select="/HL7/PV1/PV1.3.4"/>
+                   </xsl:element>
+                  
+                  <xsl:element name="PV1.4.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.4.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.5.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.5.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.6.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.6.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.7.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.7.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.8.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.8.1"/>
+                  </xsl:element>
+                  
+                  <xsl:element name="PV1.9.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.9.1"/>
+                  </xsl:element>
+            
+                  <xsl:element name="PV1.10.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.10.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.11.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.11.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.12.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.12.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.13.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.13.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.14.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.14.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.15.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.15.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.16.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.16.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.17.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.17.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.18.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.18.1"/>
+                  </xsl:element>
+                   
+                  <xsl:element name="PV1.19.1">
+                      <xsl:value-of select="/HL7/PV1/PV1.19.1"/>
+                  </xsl:element>
+            
+                  <xsl:element name="PV1.20.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.20.1"/>
+                  </xsl:element>
+            
+                  <xsl:element name="PV1.44.1">
+                     <xsl:value-of select="/HL7/PV1/PV1.44.1"/>
+                  </xsl:element>
+            
+                 <xsl:element name="PV1.50.1">
+                    <xsl:value-of select="/HL7/PV1/PV1.50.1"/>
+                 </xsl:element>
+            
+         </xsl:element> 
+      </xsl:template> 
+      
       <xsl:template name="MRG">
          <xsl:element name="MRG"> 
             
@@ -348,7 +467,6 @@
             
          </xsl:element> 
       </xsl:template> 
-
       <xsl:template match="@* | node()">
          <xsl:copy>
             <xsl:apply-templates select="@* | node()"/>

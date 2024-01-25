@@ -19,16 +19,24 @@
       <!-- ************************************************************************************************************************* -->
       <!--                                                          XSL PERSO                                                        -->
       <!-- ************************************************************************************************************************* -->
+      
       <xsl:template match="/">
          <xsl:element name="HL7">
-                   <xsl:call-template name="MSH"/>
-                   <xsl:call-template name="EVN"/>  
-                   <xsl:call-template name="PID"/>
-                   <xsl:call-template name="MRG"/>
-         </xsl:element>
-         
+            <xsl:call-template name="MSH"/>
+            <xsl:call-template name="EVN"/>  
+            <xsl:call-template name="PID"/>
+            
+            <xsl:if test="$messageType != 'A48' or $messageType='A34'">    
+               <xsl:call-template name="PV1"/> 
+            </xsl:if>
+            
+            <xsl:if test="$messageType = 'A48' or $messageType='A34'">
+               <xsl:call-template name="MRG"/>
+            </xsl:if>
+         </xsl:element> 
       </xsl:template>
+      
    
- 
+      
    </xsl:stylesheet>
 
