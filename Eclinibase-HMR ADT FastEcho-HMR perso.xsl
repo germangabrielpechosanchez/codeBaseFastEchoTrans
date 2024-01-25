@@ -24,6 +24,7 @@
                    <xsl:call-template name="MSH"/>
                    <xsl:call-template name="EVN"/>  
                    <xsl:call-template name="PID"/>
+                   <xsl:call-template name="MRG"/>
          </xsl:element>
          
       </xsl:template>
